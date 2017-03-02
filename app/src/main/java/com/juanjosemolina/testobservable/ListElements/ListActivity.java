@@ -2,9 +2,14 @@ package com.juanjosemolina.testobservable.ListElements;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
+import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 import com.juanjosemolina.testobservable.R;
+
+import java.util.List;
 
 public class ListActivity extends AppCompatActivity implements ListView{
 
@@ -19,7 +24,7 @@ public class ListActivity extends AppCompatActivity implements ListView{
     }
 
     @Override
-    public void showListInformation(MainDto data) {
+    public void showListInformation(List <Children> data) {
 
     }
 
