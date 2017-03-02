@@ -3,7 +3,6 @@ package com.juanjosemolina.testobservable.ListElements;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
-import com.juanjosemolina.testobservable.ListElements.model.dto.Data;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 
 import java.util.List;
