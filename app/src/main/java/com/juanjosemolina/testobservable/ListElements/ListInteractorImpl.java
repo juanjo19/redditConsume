@@ -29,6 +29,7 @@ public class ListInteractorImpl implements ListInteractor {
 
     }
 
+    //metodo que permite la conexion al web service
     public Observable<MainDto> getUsername(){
         return Observable.create(
                 new Observable.OnSubscribe<MainDto>(){
