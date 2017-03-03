@@ -12,6 +12,7 @@ import java.util.List;
 public interface ListView {
 
     void showListInformation(List <Children> data);
-    void showProgress();
-    void hideProgress();
+    void showProgress(boolean option);
+    void showError(String error);
+    void testShowInfo(MainDto data);
 }
