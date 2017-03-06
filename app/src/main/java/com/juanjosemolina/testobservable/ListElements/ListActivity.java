@@ -1,7 +1,11 @@
 package com.juanjosemolina.testobservable.ListElements;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,7 +14,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.juanjosemolina.testobservable.ListElements.adapter.AdapterInfo;
+import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
 import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
+import com.juanjosemolina.testobservable.ListElements.model.dto.DataJsonSQLiteHelper;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 import com.juanjosemolina.testobservable.R;
 
@@ -19,18 +26,19 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity implements ListView{
 
     private ListPresenter presenter;
-    private ProgressBar progressBar;
-    private TextView showInfo;
+    //private ProgressBar progressBar;
+    //private TextView showInfo;
+    private RecyclerView recyclerView;
+    private DataJsonSQLiteHelper jsonHelper;
+    private SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        //declaracion
-        showInfo = (TextView) findViewById(R.id.showInfo);
-
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar);
         presenter = new ListPresenterImpl(this);
         presenter.getDataApi();
     }
@@ -43,14 +51,15 @@ public class ListActivity extends AppCompatActivity implements ListView{
     @Override
     public void showProgress(boolean option) {
         if(option == true){
-            progressBar.setVisibility(View.VISIBLE);
+            //progressBar.setVisibility(View.VISIBLE);
         }else{
-            progressBar.setVisibility(View.GONE);
+            //progressBar.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void showError(String error) {
+        Log.i("error", "este es el error..."+error);
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
 
     }
@@ -62,6 +71,34 @@ public class ListActivity extends AppCompatActivity implements ListView{
         String nombre = data.getChildren().get(0).getAtributtes().getName();
         Toast.makeText(this, nombre, Toast.LENGTH_SHORT).show();
         Log.i("Esto es....", "data..."+nombre);
-        showInfo.setText(nombre);
+        //showInfo.setText(nombre);
+        jsonHelper = new DataJsonSQLiteHelper(this, "DBdatajson", null, 1);
+
+        db = jsonHelper.getWritableDatabase();
+        if(db != null){
+            ContentValues newRegister = new ContentValues();
+            for(Children datainf: data.getChildren()){
+                newRegister.put("ID", datainf.getAtributtes().getId());
+                newRegister.put("name", datainf.getAtributtes().getName());
+                newRegister.put("description", datainf.getAtributtes().getDescription());
+                newRegister.put("language", datainf.getAtributtes().getLanguage());
+                newRegister.put("url_image", datainf.getAtributtes().getImage());
+                db.insert("dataJson", null, newRegister);
+            }
+            //db.insert("dataJson", null, newRegister);
+            db.close();
+        }
+        Toast.makeText(this, "guardado correctamente", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void showList(List<AtributtesJson> listdata) {
+        recyclerView = (RecyclerView) findViewById(R.id.reciclador);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+        AdapterInfo adapterInfo = new AdapterInfo(listdata, R.layout.list_data, ListActivity.this);
+        recyclerView.setAdapter(adapterInfo);
     }
 }

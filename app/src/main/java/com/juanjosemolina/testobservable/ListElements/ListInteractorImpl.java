@@ -1,13 +1,21 @@
 package com.juanjosemolina.testobservable.ListElements;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
 import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
+import com.juanjosemolina.testobservable.ListElements.model.dto.DataJsonSQLiteHelper;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 import com.juanjosemolina.testobservable.ListElements.service.NetworkApi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -33,8 +41,11 @@ public class ListInteractorImpl implements ListInteractor {
     //String response;
     //MainDto mainDto;
     private Retrofit retrofit;
+    DataJsonSQLiteHelper jsonHelper;
     ListPresenter listPresenter;
     NetworkApi service;
+    Context context;
+    private SQLiteDatabase db;
 
     public ListInteractorImpl(ListPresenter listPresenter) {
         this.listPresenter = listPresenter;
@@ -67,98 +78,50 @@ public class ListInteractorImpl implements ListInteractor {
 
                     @Override
                     public void onNext(MainDto mainDto) {
-                        Log.i("Esto es....", "data..."+mainDto.getChildren().get(0).getTitle());
+                        //Log.i("Esto es....", "data..."+mainDto.getChildren().get(0).getTitle());
                         listPresenter.sendInfo(mainDto);
+                        //saveData(mainDto);
+                        //listPresenter.sendList(getAllData());
                     }
                 });
 
     }
 
-    /*
-    //aqui va toda la logica
-    @Override
-    public void getDataApiInteractor() {
-        getUsername().subscribe(
-                //On Next
-                new Action1<String>() {
-                    @Override
-                    public void call(String response) {
-                        //realizar accion cuando este la info
-                        Gson gson = new GsonBuilder().create();
-                        mainDto = gson.fromJson(response, MainDto.class);
-                    }
-                },
+    //metodo para almacenar la informacion en base de datos
+    public void saveData(MainDto dataJson){
+        jsonHelper = new DataJsonSQLiteHelper(context, "DBdatajson", null, 1);
 
-                //On Error
-                new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        listPresenter.shoewError(throwable.getMessage());
-                    }
-                },
-
-                //On complete
-                new Action0() {
-                    @Override
-                    public void call() {
-                        listPresenter.sendInfo(mainDto);
-                    }
-                }
-
-        );
+        db = jsonHelper.getWritableDatabase();
+        if(db != null){
+            ContentValues newRegister = new ContentValues();
+            for(Children data: dataJson.getChildren()){
+                newRegister.put("ID", data.getAtributtes().getId());
+                newRegister.put("name", data.getAtributtes().getName());
+                newRegister.put("description", data.getAtributtes().getDescription());
+                newRegister.put("language", data.getAtributtes().getLanguage());
+                newRegister.put("url_image", data.getAtributtes().getImage());
+            }
+            db.insert("dataJson", null, newRegister);
+            db.close();
+        }
     }
 
+    private List<AtributtesJson> getAllData(){
+        Cursor cursor = db.rawQuery("select * from dataJson", null);
+        List<AtributtesJson> list = new ArrayList<AtributtesJson>();
 
-    //metodo que permite la conexion al web service
-    public Observable<String> getUsername(){
-        return Observable.create(
-                new Observable.OnSubscribe<String>(){
-                    @Override
-                    public void call(Subscriber<? super String> subscriber) {
-                        try {
-                            //peticion al web service por medio de okhttp
-                            client = new OkHttpClient();
-                            response = ApiCall.GET(client, path);
-                            subscriber.onNext(response);//enviar dato
-                            subscriber.onCompleted();
-                        }catch (Exception e){
-                            subscriber.onError(e);
-                        }
-                    }
+        if(cursor.moveToFirst()){
+            while(cursor.isAfterLast() == false){
+                String id = cursor.getString(cursor.getColumnIndex("id"));
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String description = cursor.getString(cursor.getColumnIndex("description"));
+                String language = cursor.getString(cursor.getColumnIndex("language"));
+                String image = cursor.getString(cursor.getColumnIndex("url_image"));
 
-                });
+                list.add(new AtributtesJson(id, name, description, language, image));
+                cursor.moveToNext();
+            }
+        }
+        return  list;
     }
-
-
-    //metodo para ejecutar lo que se obtuvoo desde el observable
-    public void executeObservable(){
-        getUsername().subscribe(
-                //On Next
-                new Action1<String>() {
-                    @Override
-                    public void call(String response) {
-                        //realizar accion cuando este la info
-                        Gson gson = new GsonBuilder().create();
-                        mainDto = gson.fromJson(response, MainDto.class);
-                    }
-                },
-
-                //On Error
-                new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-
-                    }
-                },
-
-                //On complete
-                new Action0() {
-                    @Override
-                    public void call() {
-                         showInfo(mainDto);
-                    }
-                }
-
-        );}*/
-
 }

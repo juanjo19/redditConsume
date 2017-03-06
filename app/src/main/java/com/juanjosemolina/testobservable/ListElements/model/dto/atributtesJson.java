@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by juanjosemolina on 1/03/17.
  */
 
-public class atributtesJson {
+public class AtributtesJson {
 
     private String id;
 
@@ -19,6 +19,16 @@ public class atributtesJson {
     @SerializedName("lang")
     private String language;
 
+    @SerializedName("icon_img")
+    private String image;
+
+    public AtributtesJson(String id, String name, String description, String language, String image) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.language = language;
+        this.image = image;
+    }
 
     public String getId() {
         return id;
@@ -35,4 +45,6 @@ public class atributtesJson {
     public String getLanguage() {
         return language;
     }
+
+    public String getImage(){ return  image; }
 }

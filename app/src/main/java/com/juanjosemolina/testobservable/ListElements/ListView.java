@@ -1,5 +1,6 @@
 package com.juanjosemolina.testobservable.ListElements;
 
+import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
 import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 
@@ -15,4 +16,5 @@ public interface ListView {
     void showProgress(boolean option);
     void showError(String error);
     void testShowInfo(MainDto data);
+    void showList(List<AtributtesJson> listdata);
 }

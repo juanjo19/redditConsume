@@ -1,6 +1,9 @@
 package com.juanjosemolina.testobservable.ListElements;
 
+import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
+
+import java.util.List;
 
 /**
  * Created by juanjosemolina on 1/03/17.
@@ -25,6 +28,13 @@ public class ListPresenterImpl implements ListPresenter{
     }
 
     @Override
+    public void sendList(List<AtributtesJson> lista) {
+        if(listView != null){
+            listView.showList(lista);
+        }
+    }
+
+    @Override
     public void getDataApi() {
         if(listView != null){
             listView.showProgress(true);
@@ -44,7 +54,7 @@ public class ListPresenterImpl implements ListPresenter{
     @Override
     public void successProcess(Boolean flag) {
         if(listView != null){
-            listView.showProgress(flag);
+            //listView.showProgress(flag);
         }
     }
 }

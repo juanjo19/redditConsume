@@ -11,13 +11,13 @@ public class Children {
     private String title;
 
     @SerializedName("data")
-    private atributtesJson atributtes;
+    private AtributtesJson atributtes;
 
     public String getTitle() {
         return title;
     }
 
-    public atributtesJson getAtributtes() {
+    public AtributtesJson getAtributtes() {
         return atributtes;
     }
 }
