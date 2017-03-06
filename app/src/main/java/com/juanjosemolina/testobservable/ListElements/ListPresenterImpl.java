@@ -1,6 +1,8 @@
 package com.juanjosemolina.testobservable.ListElements;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
+import android.content.Context;
+
+import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 
 import java.util.List;
@@ -28,17 +30,17 @@ public class ListPresenterImpl implements ListPresenter{
     }
 
     @Override
-    public void sendList(List<AtributtesJson> lista) {
+    public void sendList(List<atributtesJson> lista) {
         if(listView != null){
             listView.showList(lista);
         }
     }
 
     @Override
-    public void getDataApi() {
+    public void getDataApi(Context context) {
         if(listView != null){
             listView.showProgress(true);
-            listInteractor.getDataApiInteractor();
+            listInteractor.getDataApiInteractor(context);
         }
     }
 

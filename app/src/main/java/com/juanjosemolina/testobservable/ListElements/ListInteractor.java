@@ -1,5 +1,7 @@
 package com.juanjosemolina.testobservable.ListElements;
 
+import android.content.Context;
+
 import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 
@@ -20,7 +22,7 @@ public interface ListInteractor {
     }*/
 
     //void sendInfo(List<Children> data);
-    void getDataApiInteractor();
+    void getDataApiInteractor(Context context);
 
 
 }

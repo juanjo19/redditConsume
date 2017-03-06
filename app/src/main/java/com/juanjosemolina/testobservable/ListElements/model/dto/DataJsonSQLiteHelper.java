@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataJsonSQLiteHelper extends SQLiteOpenHelper{
 
-    String sqlCreate = "CREATE TABLE dataJson (ID INTEGER PRIMARY KEY NOT NULL, name TEXT, description TEXT, language TEXT, url_image TEXT)";
+    String sqlCreate = "CREATE TABLE dataJson (ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, idJson TEXT, name TEXT, description TEXT, language TEXT, urlImage TEXT)";
 
     public DataJsonSQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

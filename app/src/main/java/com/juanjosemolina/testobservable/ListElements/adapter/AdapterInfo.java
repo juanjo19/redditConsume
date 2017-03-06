@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
+import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
 import com.juanjosemolina.testobservable.R;
 
 import java.util.List;
@@ -18,11 +18,11 @@ import java.util.List;
 
 public class AdapterInfo extends RecyclerView.Adapter<AdapterInfo.holderInfo> {
 
-    private List<AtributtesJson> atributtesJsons;
+    private List<atributtesJson> atributtesJsons;
     private int resource;
     private Activity activity;
 
-    public AdapterInfo(List<AtributtesJson> atributtesJsons, int resource, Activity activity) {
+    public AdapterInfo(List<atributtesJson> atributtesJsons, int resource, Activity activity) {
         this.atributtesJsons = atributtesJsons;
         this.resource = resource;
         this.activity = activity;
@@ -36,7 +36,7 @@ public class AdapterInfo extends RecyclerView.Adapter<AdapterInfo.holderInfo> {
 
     @Override
     public void onBindViewHolder(holderInfo holder, int position) {
-        AtributtesJson atributtesJson = atributtesJsons.get(position);
+        atributtesJson atributtesJson = atributtesJsons.get(position);
         holder.title_data.setText(atributtesJson.getName());
     }
 

@@ -1,6 +1,8 @@
 package com.juanjosemolina.testobservable.ListElements;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.AtributtesJson;
+import android.content.Context;
+
+import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
 import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
 
 import java.util.List;
@@ -11,8 +13,8 @@ import java.util.List;
 
 public interface ListPresenter {
     void sendInfo(MainDto result);
-    void sendList(List<AtributtesJson> lista);
-    void getDataApi();
+    void sendList(List<atributtesJson> lista);
+    void getDataApi(Context context);
     void shoewError(String error);
     void successProcess(Boolean flag);
 }
