@@ -94,7 +94,7 @@ public class ListInteractorImpl implements ListInteractor {
                 newRegister.put("urlImage", datainf.getAtributtes().getImage());
                 db.insert("dataJson", null, newRegister);
             }
-            db.close();
+          //  db.close();
         }
     }
 
@@ -114,6 +114,7 @@ public class ListInteractorImpl implements ListInteractor {
                 cursor.moveToNext();
             }
         }
+        db.close();
         return  list;
     }
 }

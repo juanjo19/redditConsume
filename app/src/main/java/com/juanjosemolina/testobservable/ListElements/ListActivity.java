@@ -90,12 +90,11 @@ public class ListActivity extends AppCompatActivity implements ListView{
     public void showList(List<atributtesJson> listdata) {
 
         Toast.makeText(this, listdata.get(1).getDescription(), Toast.LENGTH_SHORT).show();
-        /*
         recyclerView = (RecyclerView) findViewById(R.id.reciclador);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         AdapterInfo adapterInfo = new AdapterInfo(listdata, R.layout.list_data, ListActivity.this);
-        recyclerView.setAdapter(adapterInfo);*/
+        recyclerView.setAdapter(adapterInfo);
     }
 }
