@@ -1,12 +1,16 @@
 package com.juanjosemolina.testobservable.ListElements.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.juanjosemolina.testobservable.DataElements.DataElementsActivity;
 import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
 import com.juanjosemolina.testobservable.R;
 
@@ -38,6 +42,19 @@ public class AdapterInfo extends RecyclerView.Adapter<AdapterInfo.holderInfo> {
     public void onBindViewHolder(holderInfo holder, int position) {
         atributtesJson atributtesJson = atributtesJsons.get(position);
         holder.title_data.setText(atributtesJson.getName());
+        holder.cardinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, DataElementsActivity.class);
+                /**se envia como atributo todo el objeto a la otra vista
+                 * para evitar consultarlo de nuevo
+                 */
+                intent.putExtra("data", atributtesJson);
+                activity.startActivity(intent);
+
+                Toast.makeText(activity, "hiciste click"+atributtesJson, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -48,10 +65,12 @@ public class AdapterInfo extends RecyclerView.Adapter<AdapterInfo.holderInfo> {
     public class holderInfo extends RecyclerView.ViewHolder{
 
         private TextView title_data;
+        private CardView cardinfo;
 
         public holderInfo(View itemView) {
             super(itemView);
             title_data = (TextView) itemView.findViewById(R.id.title_data);
+            cardinfo = (CardView) itemView.findViewById(R.id.cardview_data);
         }
     }
 }

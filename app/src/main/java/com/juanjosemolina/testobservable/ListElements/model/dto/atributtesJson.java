@@ -2,11 +2,14 @@ package com.juanjosemolina.testobservable.ListElements.model.dto;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by juanjosemolina on 1/03/17.
  */
 
-public class atributtesJson {
+@SuppressWarnings("serial")
+public class atributtesJson implements Serializable {
 
     private String id;
 
