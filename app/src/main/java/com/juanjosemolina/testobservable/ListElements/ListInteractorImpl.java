@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
@@ -82,9 +83,11 @@ public class ListInteractorImpl implements ListInteractor {
     //metodo para almacenar la informacion en base de datos
     public void saveData(MainDto dataJson, Context context){
         jsonHelper = new DataJsonSQLiteHelper(context, "DBdatajson", null, 1);
-
         db = jsonHelper.getWritableDatabase();
+
         if(db != null){
+            //linea de codigo para evitar que se repitan registros.
+            jsonHelper.onUpgrade(db, db.getVersion(), db.getVersion());
             ContentValues newRegister = new ContentValues();
             for(Children datainf: dataJson.getChildren()){
                 newRegister.put("idJson", datainf.getAtributtes().getId());
