@@ -1,6 +1,6 @@
 package com.juanjosemolina.testobservable.ListElements.service;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
+import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
 
 import retrofit2.http.GET;
 import rx.Observable;
@@ -13,6 +13,6 @@ public interface NetworkApi {
 
     // url complete https://www.reddit.com/reddits.json
     @GET("reddits.json")
-    Observable<MainDto> getData();
+    Observable<atributtesJson.MainDto> getData();
 
 }

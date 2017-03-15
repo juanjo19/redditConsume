@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
+import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
 import com.juanjosemolina.testobservable.R;
 
 public class DataElementsActivity extends AppCompatActivity {

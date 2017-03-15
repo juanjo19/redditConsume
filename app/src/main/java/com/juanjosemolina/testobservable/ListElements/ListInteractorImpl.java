@@ -4,13 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
-import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
-import com.juanjosemolina.testobservable.ListElements.model.dto.DataJsonSQLiteHelper;
-import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
+import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
+import com.juanjosemolina.testobservable.model.dtos.Children;
+import com.juanjosemolina.testobservable.model.dtos.DataJsonSQLiteHelper;
 import com.juanjosemolina.testobservable.ListElements.service.NetworkApi;
 
 import java.util.ArrayList;
@@ -54,11 +51,11 @@ public class ListInteractorImpl implements ListInteractor {
     @Override
     public void getDataApiInteractor(Context context) {
 
-        Observable<MainDto> dataJson = service.getData();
+        Observable<atributtesJson.MainDto> dataJson = service.getData();
 
         dataJson.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MainDto>() {
+                .subscribe(new Subscriber<atributtesJson.MainDto>() {
                     @Override
                     public void onCompleted() {
                         listPresenter.successProcess(false);
@@ -70,7 +67,7 @@ public class ListInteractorImpl implements ListInteractor {
                     }
 
                     @Override
-                    public void onNext(MainDto mainDto) {
+                    public void onNext(atributtesJson.MainDto mainDto) {
                         //Log.i("Esto es....", "data..."+mainDto.getChildren().get(0).getTitle());
                         //listPresenter.sendInfo(mainDto);
                         saveData(mainDto, context);
@@ -81,7 +78,7 @@ public class ListInteractorImpl implements ListInteractor {
     }
 
     //metodo para almacenar la informacion en base de datos
-    public void saveData(MainDto dataJson, Context context){
+    public void saveData(atributtesJson.MainDto dataJson, Context context){
         jsonHelper = new DataJsonSQLiteHelper(context, "DBdatajson", null, 1);
         db = jsonHelper.getWritableDatabase();
 

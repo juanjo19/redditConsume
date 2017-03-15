@@ -1,4 +1,4 @@
-package com.juanjosemolina.testobservable.ListElements.model.dto;
+package com.juanjosemolina.testobservable.model.dtos;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -2,8 +2,7 @@ package com.juanjosemolina.testobservable.ListElements;
 
 import android.content.Context;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
-import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
+import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
 
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ListPresenterImpl implements ListPresenter{
     }
 
     @Override
-    public void sendInfo(MainDto result) {
+    public void sendInfo(atributtesJson.MainDto result) {
         if(listView != null){
             listView.testShowInfo(result);
         }

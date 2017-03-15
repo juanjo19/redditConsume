@@ -1,4 +1,4 @@
-package com.juanjosemolina.testobservable.ListElements.model.dto;
+package com.juanjosemolina.testobservable.model.dtos;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

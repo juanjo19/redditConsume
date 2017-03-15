@@ -1,7 +1,6 @@
 package com.juanjosemolina.testobservable.ListElements;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +10,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.juanjosemolina.testobservable.ListElements.adapter.AdapterInfo;
-import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
-import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
-import com.juanjosemolina.testobservable.ListElements.model.dto.DataJsonSQLiteHelper;
-import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
+import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
+import com.juanjosemolina.testobservable.model.dtos.Children;
+import com.juanjosemolina.testobservable.model.dtos.DataJsonSQLiteHelper;
 import com.juanjosemolina.testobservable.R;
 
 import java.util.List;
@@ -61,7 +59,7 @@ public class ListActivity extends AppCompatActivity implements ListView{
 
 
     @Override
-    public void testShowInfo(MainDto data) {
+    public void testShowInfo(atributtesJson.MainDto data) {
         //presenter.sendInfo(data);
         String nombre = data.getChildren().get(0).getAtributtes().getName();
         Toast.makeText(this, nombre, Toast.LENGTH_SHORT).show();

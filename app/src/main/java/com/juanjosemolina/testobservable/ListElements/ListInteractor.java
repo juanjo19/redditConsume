@@ -2,11 +2,6 @@ package com.juanjosemolina.testobservable.ListElements;
 
 import android.content.Context;
 
-import com.juanjosemolina.testobservable.ListElements.model.dto.Children;
-import com.juanjosemolina.testobservable.ListElements.model.dto.MainDto;
-
-import java.util.List;
-
 /**
  * Created by juanjosemolina on 1/03/17.
  */

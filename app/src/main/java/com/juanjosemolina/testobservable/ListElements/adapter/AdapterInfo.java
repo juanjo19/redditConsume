@@ -7,12 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.juanjosemolina.testobservable.DataElements.DataElementsActivity;
-import com.juanjosemolina.testobservable.ListElements.model.dto.atributtesJson;
+import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
 import com.juanjosemolina.testobservable.R;
 import com.squareup.picasso.Picasso;
 
