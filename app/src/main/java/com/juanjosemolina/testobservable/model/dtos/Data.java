@@ -1,7 +1,5 @@
 package com.juanjosemolina.testobservable.model.dtos;
 
-import com.juanjosemolina.testobservable.model.dtos.Children;
-
 import java.util.List;
 
 /**

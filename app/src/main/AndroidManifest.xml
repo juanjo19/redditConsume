@@ -3,6 +3,7 @@
     package="com.juanjosemolina.testobservable">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,11 @@
         </activity>
         <activity android:name=".ListElements.ListActivity" />
         <activity android:name=".DataElements.DataElementsActivity"></activity>
+        <receiver android:name=".mBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

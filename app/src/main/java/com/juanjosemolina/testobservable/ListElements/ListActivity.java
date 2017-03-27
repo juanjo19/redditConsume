@@ -1,6 +1,8 @@
 package com.juanjosemolina.testobservable.ListElements;
 
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.juanjosemolina.testobservable.ListElements.adapter.AdapterInfo;
+import com.juanjosemolina.testobservable.mBroadcastReceiver;
 import com.juanjosemolina.testobservable.model.dtos.atributtesJson;
 import com.juanjosemolina.testobservable.model.dtos.Children;
 import com.juanjosemolina.testobservable.model.dtos.DataJsonSQLiteHelper;
@@ -20,16 +23,21 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity implements ListView{
 
     private ListPresenter presenter;
+    private BroadcastReceiver broadcastReceiver;
     //private ProgressBar progressBar;
     //private TextView showInfo;
     private RecyclerView recyclerView;
     private DataJsonSQLiteHelper jsonHelper;
+    private IntentFilter intentFilter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        broadcastReceiver = new mBroadcastReceiver();
+        intentFilter = new IntentFilter("com.juanjosemolina.testobservable.SOME_ACTION");
 
         //progressBar = (ProgressBar) findViewById(R.id.progressBar);
         presenter = new ListPresenterImpl(this);
@@ -94,5 +102,10 @@ public class ListActivity extends AppCompatActivity implements ListView{
         recyclerView.setLayoutManager(manager);
         AdapterInfo adapterInfo = new AdapterInfo(listdata, R.layout.list_data, ListActivity.this);
         recyclerView.setAdapter(adapterInfo);
+    }
+
+    protected  void onStart(){
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter();
     }
 }
